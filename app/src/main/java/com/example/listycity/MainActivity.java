@@ -14,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import android.content.Intent;
+
 
 public class MainActivity extends AppCompatActivity {
     ListView cityList;
@@ -48,9 +50,24 @@ public class MainActivity extends AppCompatActivity {
         cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                selectedPos= position;
+
+                selectedPos = position;
+
+                String cityName = dataList.get(position);
+
+                Intent intent = new Intent(MainActivity.this, ShowActivity.class);
+                intent.putExtra("cityName", cityName);
+
+                startActivity(intent);
             }
         });
+
+//        cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                selectedPos= position;
+//            }
+//        });
 
         addCityButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -60,6 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 cityInput.requestFocus();
             }
         });
+
+
 
         confirmCityButton.setOnClickListener(new View.OnClickListener() {
             @Override
